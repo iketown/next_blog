@@ -4,6 +4,8 @@ import Thumbnail from "../../components/Thumbnail";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Error from "next/error";
+import nookies from "nookies";
+
 const CountryHome = ({ shows, country, statusCode }) => {
   if (statusCode) {
     return <Error {...{ statusCode }} />;
@@ -15,8 +17,8 @@ const CountryHome = ({ shows, country, statusCode }) => {
     return shows.map((showItem, index) => {
       const { show } = showItem;
       return (
-        <div>
-          <li key={`${index}${show.id}`}>
+        <div key={`${index}${show.id}`}>
+          <li>
             <a>{show?.name}</a>
             <Thumbnail
               imageUrl={show?.image?.medium}
@@ -31,7 +33,9 @@ const CountryHome = ({ shows, country, statusCode }) => {
   };
   return (
     <div>
-      <ul className="tvshows-grid">{renderShows()}</ul>
+      <div>
+        <ul className="tvshows-grid">{renderShows()}</ul>
+      </div>
       <style jsx>{`
         .tvshows-grid {
           display: grid;
@@ -47,7 +51,8 @@ const CountryHome = ({ shows, country, statusCode }) => {
 
 CountryHome.getInitialProps = async (ctx) => {
   try {
-    const country = ctx?.query?.country || "US";
+    const { defaultCountry } = nookies.get(ctx);
+    const country = ctx?.query?.country || defaultCountry || "us";
     const url = `https://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`;
     const data = await axios.get(url).then(({ data }) => data);
     return {
