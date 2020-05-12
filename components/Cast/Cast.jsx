@@ -1,7 +1,5 @@
 import React from "react";
 import Thumbnail from "../Thumbnail";
-import { ThumbnailStyles } from "../Thumbnail/styles";
-import css from "styled-jsx/css";
 
 const Cast = ({ cast }) => {
   const renderCast = () => {

@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import Thumbnail from "../../components/Thumbnail";
-import { ListStyles } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Error from "next/error";
@@ -33,7 +32,15 @@ const CountryHome = ({ shows, country, statusCode }) => {
   return (
     <div>
       <ul className="tvshows-grid">{renderShows()}</ul>
-      <style jsx>{ListStyles}</style>
+      <style jsx>{`
+        .tvshows-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          margin: 0;
+          list-style-type: none;
+        }
+      `}</style>
     </div>
   );
 };

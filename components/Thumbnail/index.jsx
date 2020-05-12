@@ -1,5 +1,4 @@
 import React from "react";
-import { ThumbnailStyles } from "./styles";
 import Link from "next/link";
 
 const Thumbnail = ({ imageUrl, caption, href = "", as = "", small }) => {
