@@ -5,6 +5,7 @@ import Link from "next/link";
 import Cast from "../../components/Cast/Cast";
 import Error from "next/error";
 import CustomError from "../_error";
+import { withAuth } from "../../utils/withAuth";
 //
 //
 const ShowDetails = ({ show = {}, country, url, statusCode }) => {
@@ -53,4 +54,4 @@ ShowDetails.getInitialProps = async ({ query }) => {
   }
 };
 
-export default ShowDetails;
+export default withAuth(ShowDetails);
